@@ -1,10 +1,15 @@
-import { observable, action, makeObservable } from "mobx";
+import { observable, action, makeObservable, computed } from "mobx";
+import { initData } from "./initData";
 
 export class ToDoStore {
     todos = [];
 
+    get getTodoItem() {
+        return (index) => this.todos[index];
+    }
+
     addTodoItem = (text) => {
-        this.todos.push({ text, completed: false, highlighted: false });
+        this.todos.unshift({ text, completed: false, highlighted: false });
     };
 
     removeTodoItem = (index) => {
@@ -13,27 +18,53 @@ export class ToDoStore {
 
     completeTodoItem = (index) => {
         const todo = this.todos[index];
-        this.todos.splice(index, 1);
-        this.todos.push(todo);
+        todo.completed = !todo.completed
+        
     };
+
+    sortTasksByChecked = () => {
+        this.todos.sort((a, b) => {
+            if (a.completed === b.completed) {
+                return 0;
+            } else if (a.completed === false) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+        console.log(this.todos)
+    }
 
     updateTodoItem = (index, newText) => {
         this.todos[index].text = newText;
     };
 
-    changeHighlight(index) {
-        this.todos[index].highlighted = !this.todos[index].highlighted;
+    onHighlight(index) {
+        this.todos[index].highlighted = true;
+    }
+
+    offHighlight(index) {
+        this.todos[index].highlighted = false;
+    }
+
+    init() {
+        this.todos = [...initData];
+        this.sortTasksByChecked();
     }
 
     constructor() {
         makeObservable(this, {
             todos: observable,
+            getTodoItem: computed,
             addTodoItem: action,
             removeTodoItem: action,
             completeTodoItem: action,
+            sortTasksByChecked: action,
             updateTodoItem: action,
-            changeHighlight: action
+            onHighlight: action,
+            offHighlight: action
         })
+        this.init();
     }
 }
 

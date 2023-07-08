@@ -1,0 +1,48 @@
+@import './common.module.scss';
+
+#list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: $grey;
+
+    .el {
+        display: grid;
+        grid-template-columns: 1fr 9fr 1fr 1fr;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+
+        &.completed {
+            text-decoration: line-through;
+            text-decoration-color: $red;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+        }
+
+        .label {
+            /* Стили обертки чекбокса */
+            background-color: aqua;
+        }
+
+        .text {
+            font-size: 30px;
+            text-align: left;
+        }
+
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $violet;
+
+            .icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}

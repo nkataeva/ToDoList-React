@@ -1,6 +1,8 @@
 import todoStore from '../stores/ListStore';
+import { observer } from 'mobx-react-lite';
 
-const ControlButtons = () => {
+const ControlButtons = observer(() => {
+
 
     const handleRemoveFirst = () => {
         if (todoStore.todos.length > 0) {
@@ -16,8 +18,7 @@ const ControlButtons = () => {
     };
 
     const handleEvenItemsHighlight = () => {
-        console.log(todoStore.todos)
-        todoStore.todos.forEach((index) => {
+        todoStore.todos.forEach((todo, index) => {
             if ((index + 1) % 2 === 0) {
                 todoStore.changeHighlight(index);
             }
@@ -27,7 +28,7 @@ const ControlButtons = () => {
     const handleOddItemsHighlight = () => {
         todoStore.todos.forEach((todo, index) => {
             if ((index + 1) % 2 !== 0) {
-                todoStore.changeHighlight();
+                todoStore.changeHighlight(index);
             }
         });
     };
@@ -40,6 +41,6 @@ const ControlButtons = () => {
             <button onClick={handleOddItemsHighlight}>Highlight Odd Items</button>
         </>
     )
-}
+})
 
 export default ControlButtons;

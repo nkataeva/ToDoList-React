@@ -1,0 +1,10 @@
+$grey: #2B373C;
+$violet: #737283;
+$red: #792A1B;
+
+@mixin button {
+    color: white;
+    padding: 5px 10px;
+    background-color: $violet;
+    border-radius: 20px;
+}
