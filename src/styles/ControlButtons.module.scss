@@ -1,0 +1,27 @@
+@import './common.module.scss';
+
+.buttons {
+    display: grid;
+    grid-template-areas: "left right";
+    gap: 50px;
+    justify-content: center;
+
+    .left {
+        grid-area: left;
+    }
+
+    .right {
+        grid-area: right;
+    }
+
+    .left, .right {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+    }
+
+    .button {
+        @include button;
+    }
+}

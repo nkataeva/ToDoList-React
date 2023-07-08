@@ -9,9 +9,9 @@ const ToDoList = observer(() => {
   return (
     <div className={s['container-list']}>
       <p id={s.title}>To Do List</p>
-      {/* <ControlButtons /> */}
       <FormAdd />
       <List />
+      {/* <ControlButtons /> */}
     </div>
   );
 });

@@ -1,5 +1,6 @@
 import todoStore from '../stores/ListStore';
 import { observer } from 'mobx-react-lite';
+import s from '../styles/ControlButtons.module.scss'
 
 const ControlButtons = observer(() => {
 
@@ -34,12 +35,17 @@ const ControlButtons = observer(() => {
     };
 
     return (
-        <>
-            <button onClick={handleRemoveFirst}>Remove First</button>
-            <button onClick={handleRemoveLast}>Remove Last</button>
-            <button onClick={handleEvenItemsHighlight}>Highlight Even Items</button>
-            <button onClick={handleOddItemsHighlight}>Highlight Odd Items</button>
-        </>
+        <div className={s.buttons}>
+            <div className={s.left}>
+                <button className={s.button} onClick={handleRemoveFirst}>Remove First</button>
+                <button className={s.button} onClick={handleRemoveLast}>Remove Last</button>
+            </div>
+            <div className={s.right}>
+                <button className={s.button} onClick={handleEvenItemsHighlight}>Highlight Even</button>
+                <button className={s.button} onClick={handleOddItemsHighlight}>Highlight Odd</button>
+            </div>
+
+        </div>
     )
 })
 

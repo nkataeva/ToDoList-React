@@ -39,12 +39,8 @@ export class ToDoStore {
         this.todos[index].text = newText;
     };
 
-    onHighlight(index) {
-        this.todos[index].highlighted = true;
-    }
-
-    offHighlight(index) {
-        this.todos[index].highlighted = false;
+    changeHighlight(index) {
+        this.todos[index].highlighted = !this.todos[index].highlighted;
     }
 
     init() {
@@ -61,8 +57,7 @@ export class ToDoStore {
             completeTodoItem: action,
             sortTasksByChecked: action,
             updateTodoItem: action,
-            onHighlight: action,
-            offHighlight: action
+            changeHighlight: action,
         })
         this.init();
     }

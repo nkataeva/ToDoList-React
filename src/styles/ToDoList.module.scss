@@ -11,6 +11,10 @@
         width: 80%;
     }
 
+    @media screen and (max-width: 1000px) {
+        width: 70%;
+    }
+
     #title {
         font-size: 36px;
     }

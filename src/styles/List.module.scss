@@ -8,14 +8,13 @@
 
     .el {
         display: grid;
-        grid-template-columns: 1fr 9fr 1fr 1fr;
+        grid-template-columns: 1fr 12fr 1fr 1fr;
         align-items: center;
         justify-content: center;
         gap: 5px;
 
-        &.completed {
-            text-decoration: line-through;
-            text-decoration-color: $red;
+        &.highlighted {
+            background-color: rgba(77, 77, 77, 0.5);
         }
 
         .checkbox {
@@ -31,6 +30,11 @@
         .text {
             font-size: 30px;
             text-align: left;
+
+            &.completed {
+                text-decoration: line-through;
+                text-decoration-color: $red;
+            }
         }
 
         .button {

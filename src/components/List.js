@@ -8,47 +8,11 @@ import s from '../styles/List.module.scss'
 const List = observer(() => {
     const [editTaskIndex, setEditTaskIndex] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isHighEven, setIsHighEven] = useState(false);
-    const [isHighOdd, setIsHighOdd] = useState(false);
 
     const handleCheckboxChange = (index) => {
         todoStore.completeTodoItem(index);
         todoStore.sortTasksByChecked();
     };
-
-    // костыль
-    const handleHigh = (index) => {
-        setIsHighEven(!isHighEven);
-        if (isHighEven) {
-            if ((index - 1) % 2 === 0) {
-                todoStore.todos.forEach((todo, index) => {
-                    if ((index + 1) % 2 === 0) {
-                        todoStore.onHighlight(index);
-                    }
-                });
-            } else {
-                todoStore.todos.forEach((todo, index) => {
-                    if ((index + 1) % 2 !== 0) {
-                        todoStore.onHighlight(index);
-                    }
-                });
-            }
-        } else {
-            if ((index - 1) % 2 === 0) {
-                todoStore.todos.forEach((todo, index) => {
-                    if ((index + 1) % 2 === 0) {
-                        todoStore.offHighlight(index);
-                    }
-                });
-            } else {
-                todoStore.todos.forEach((todo, index) => {
-                    if ((index + 1) % 2 !== 0) {
-                        todoStore.offHighlight(index);
-                    }
-                });
-            }
-        }
-    }
 
     const handleRemoveTodo = (index) => {
         todoStore.removeTodoItem(index);
@@ -63,10 +27,9 @@ const List = observer(() => {
         <div id={s.list}>
             {todoStore.todos.map((todo, index) => (
                 <div
-                    className={`${s.el} ${todo.completed ? s.completed : ''}`}
-                    key={index}
-                    style={{ backgroundColor: todo.highlighted ? 'yellow' : 'transparent' }}>
-
+                    className={`${s.el} ${todo.highlighted ? s.highlighted : ''}`}
+                    // className={s.el}
+                    key={index}>
                     <input
                         className={s.checkbox}
                         id={s.input}
@@ -74,7 +37,7 @@ const List = observer(() => {
                         checked={todo.completed}
                         onChange={() => handleCheckboxChange(index)} />
 
-                    <p className={s.text} onClick={() => handleHigh(index)}>{todo.text}</p>
+                    <p className={`${s.text} ${todo.completed ? s.completed : ''}`}>{todo.text}</p>
                     <button className={s.button} onClick={() => handleEditClick(index)}>
                         <VscEdit className={s.icon} />
                     </button>
